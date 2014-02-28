@@ -44,7 +44,7 @@ use OpenCloud\Compute\Constants\ServerState;
 // flavor time
 while ($flavor = $flavors->next()) {
 	if (strpos($flavor->name, '1GB') !== false) {
-		$oneGb = $flavor;
+		$halfGb = $flavor;
 		break;
 	}
 }
@@ -67,7 +67,7 @@ try {
     $response = $server->create(array(
 	'name'	=> "$servName$num",
 	'image' => $centos, 
-        'flavor' => $oneGb,
+        'flavor' => $halfGb,
 	)
      );
 }
