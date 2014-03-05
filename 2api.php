@@ -1,19 +1,16 @@
 <?php
 require 'vendor/autoload.php';
+require 'auth.php';
 
 use OpenCloud\Rackspace;
-$client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
-    'username' => '',
-    'apiKey'   => ''
-));
 
 $service = $client->computeService('cloudServersOpenStack', 'ORD');
 $compute = $client->computeService('cloudServersOpenStack', 'ORD');
 $server = $compute->server();
 $flavors=$compute->flavorList();
 $images = $compute->imageList();
-$server->addFile('/root/.ssh/authorized_keys2', 'INSERT-SSH-KEY-HERE'); 
-
+// insert key hafter 'ssh-rsa'
+$server->addFile('/root/.ssh/authorized_keys2', 'ssh-rsa 123456');
 
 // would convert this to form for customer use
 
@@ -43,7 +40,7 @@ use OpenCloud\Compute\Constants\ServerState;
 
 // flavor time
 while ($flavor = $flavors->next()) {
-	if (strpos($flavor->name, '1GB') !== false) {
+	if (strpos($flavor->name, '512MB') !== false) {
 		$halfGb = $flavor;
 		break;
 	}

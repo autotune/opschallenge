@@ -1,11 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-
-use OpenCloud\Rackspace;
-$client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
-    'username' => '',
-    'apiKey'   => ''
-));
+require 'auth.php';
 
 $service = $client->computeService('cloudServersOpenStack', 'ORD');
 $compute = $client->computeService('cloudServersOpenStack', 'ORD');
