@@ -60,7 +60,6 @@ def updateData():
 	print "updating..."
 	with suppress_output(sys.stderr, os.devnull):
 	# create file and send out contents
-		os.remove('out.txt')
 		file = open('out.txt', 'w')
 		print >> file, cdb.list()
 		file.close()
@@ -166,11 +165,11 @@ with open ('out.txt','r') as myfile:
 for i in range(0, dbNum):
 	i = str(i)
 	db = inst.create_database("testdb" + i)
+	os.system('cls' if os.name == 'nt' else 'clear')
 	password = ''
 	password += chr(random.randint(33,126))
 	
-	print "user" + i + 'password: '
-
+	print "user" + i + 'password: ' + password
 	user = inst.create_user(name="user" + i, password=password + i, database_names=[db], host="%")
 	print "DB:", db
 
